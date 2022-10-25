@@ -13,13 +13,13 @@
   "defaultArguments" : {
     "--enable-metrics" : "true",
     "--enable-spark-ui" : "true",
-    "--spark-event-logs-path" : "s3://aws-glue-assets-614273025390-us-east-1/sparkHistoryLogs/",
+    "--spark-event-logs-path" : "s3://ai-report-dev-emr/local/glue/scripts/",
     "--enable-job-insights" : "true",
     "--enable-glue-datacatalog" : "true",
     "--enable-continuous-cloudwatch-log" : "true",
     "--job-bookmark-option" : "job-bookmark-enable",
     "--job-language" : "python",
-    "--TempDir" : "s3://aws-glue-assets-614273025390-us-east-1/temporary/",
+    "--TempDir" : "s3://ai-report-dev-emr/local/glue/temporary/",
     "--source.database.name" : "sas-datasync",
     "--source.talbe.name" : "datasyncdb_dev_demoredshift06"
   },
@@ -34,7 +34,7 @@
   "numberOfWorkers" : 10,
   "workerType" : "G.1X",
   "executionClass" : "STANDARD",
-  "codeGenConfigurationNodes" : "{\"node-1666682440272\":{\"S3CatalogTarget\":{\"Database\":\"sas-datasync\",\"Inputs\":[\"node-1666682405069\"],\"Name\":\"AWS Glue Data Catalog\",\"PartitionKeys\":[[\"name\"]],\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":true,\"UpdateBehavior\":\"UPDATE_IN_DATABASE\"},\"Table\":\"datasyncdb_dev_sas_local_result_df\"}},\"node-1666682405069\":{\"Filter\":{\"Filters\":[{\"Negated\":false,\"Operation\":\"GT\",\"Values\":[{\"Type\":\"COLUMNEXTRACTED\",\"Value\":[\"id\"]},{\"Type\":\"CONSTANT\",\"Value\":[\"1\"]}]}],\"Inputs\":[\"node-1666682357853\"],\"LogicalOperator\":\"AND\",\"Name\":\"Filter\"}},\"node-1666682357853\":{\"CatalogSource\":{\"Database\":\"${source.database.name}\",\"Name\":\"AWS Glue Data Catalog\",\"Table\":\"${source.talbe.name}\"}}}",
+  "codeGenConfigurationNodes" : "{\"node-1666682440272\":{\"S3CatalogTarget\":{\"Database\":\"sas-datasync\",\"Inputs\":[\"node-1666682405069\"],\"Name\":\"AWS Glue Data Catalog\",\"PartitionKeys\":[[\"name\"]],\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":true,\"UpdateBehavior\":\"UPDATE_IN_DATABASE\"},\"Table\":\"sas_local_catalog_result\"}},\"node-1666682405069\":{\"Filter\":{\"Filters\":[{\"Negated\":false,\"Operation\":\"GT\",\"Values\":[{\"Type\":\"COLUMNEXTRACTED\",\"Value\":[\"id\"]},{\"Type\":\"CONSTANT\",\"Value\":[\"1\"]}]}],\"Inputs\":[\"node-1666682357853\"],\"LogicalOperator\":\"AND\",\"Name\":\"Filter\"}},\"node-1666682357853\":{\"CatalogSource\":{\"Database\":\"${source.database.name}\",\"Name\":\"AWS Glue Data Catalog\",\"Table\":\"${source.talbe.name}\"}}}",
   "sourceControlDetails" : {
     "provider" : "GITHUB",
     "repository" : "sas-glue-etl",

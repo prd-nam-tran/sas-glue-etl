@@ -1,0 +1,53 @@
+{
+  "name" : "sas_paradox_prod_transform_candidate",
+  "description" : "",
+  "role" : "arn:aws:iam::614273025390:role/AWSGlueFullAccess",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/scripts/sas_paradox_prod_transform_candidate.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--SAS_ICEBERG_CATALOG_WAREHOUSE" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/de-duplication/",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-enable",
+    "--datalake-formats" : "iceberg",
+    "--TempDir" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/temporary/",
+    "--SAS_GLUE_CATALOG_CDC_DB_NAME" : "sas_paradox_prod_cdc_history",
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--extra-py-files" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/library/olivia_glue-v1.1.1.zip",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-614273025390-us-east-1/sparkHistoryLogs/",
+    "--SAS_ICEBERG_CATALOG_NAME" : "job_catalog",
+    "--enable-job-insights" : "true",
+    "--SAS_S3_OUTPUT_PATH" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/output/",
+    "--conf" : "spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.forceApply=false --conf spark.sql.adaptive.logLevel=info --conf spark.sql.adaptive.advisoryPartitionSizeInBytes=128m --conf spark.sql.adaptive.coalescePartitions.enabled=true --conf spark.sql.adaptive.coalescePartitions.minPartitionNum=1 --conf spark.sql.adaptive.coalescePartitions.initialPartitionNum=200 --conf spark.sql.adaptive.fetchShuffleBlocksInBatch=true --conf spark.sql.adaptive.localShuffleReader.enabled=true --conf spark.sql.adaptive.skewJoin.enabled=true --conf spark.sql.adaptive.skewJoin.skewedPartitionFactor=5 --conf spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes=256 --conf spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin=0.2 --conf spark.sql.autoBroadcastJoinThreshold=-1",
+    "--SAS_IS_CDC_JOB" : "1",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--SAS_GLUE_CATALOG_OUTPUT_DB_NAME" : "sas_paradox_prod_output",
+    "--job-language" : "python",
+    "--enable-auto-scaling" : "true",
+    "--extra-files" : "s3://ai-paradox-prod-use1-reporting-restricted/glue/configs/log4j2.properties",
+    "--SAS_ICEBERG_DB_NAME" : "sas_paradox_prod_de_duplication"
+  },
+  "connections" : {
+    "connections" : [ "Apache Iceberg Connector for Glue 4.0" ]
+  },
+  "maxRetries" : 5,
+  "allocatedCapacity" : 5,
+  "timeout" : 60,
+  "maxCapacity" : 5.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 5,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "sas-glue-etl",
+    "branch" : "master",
+    "folder" : "sas_paradox_prod_transform_candidate"
+  }
+}
